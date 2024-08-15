@@ -22,4 +22,16 @@ class Graph
       current_node = Node.new(coord)
     end
   end
+
+  def possible_moves(row, col)
+    moves = []
+    moves.push([row - 2, row + 1])
+    moves.push([row - 2, row - 1])
+    moves.push([row + 2, row + 1])
+    moves.push([row + 2, row - 1])
+    moves.push([col - 2, col + 1])
+    moves.push([col - 2, col - 1])
+    moves.push([col + 2, col + 1])
+    moves.push([col + 2, col - 1])
+  end
 end
