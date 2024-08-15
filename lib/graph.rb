@@ -33,6 +33,7 @@ class Graph
     moves.push([col - 2, col - 1])
     moves.push([col + 2, col + 1])
     moves.push([col + 2, col - 1])
+    moves
   end
 
   def remove_impossible_moves(moves)
