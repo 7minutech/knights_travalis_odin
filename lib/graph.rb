@@ -1,3 +1,4 @@
+require_relative "node"
 class Graph
   attr_accessor :coords, :nodes
 
