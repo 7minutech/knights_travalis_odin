@@ -1,5 +1,5 @@
 class Graph
-  attr_accessor :coords
+  attr_accessor :coords, :nodes
 
   def initialize
     @coords = []
@@ -20,6 +20,9 @@ class Graph
       x = coord[0]
       y = coord[1]
       current_node = Node.new(coord)
+      possible_moves = remove_impossible_moves(possible_moves(x, y))
+      current_node.nodes = possible_moves
+      @nodes.push(current_node)
     end
   end
 
