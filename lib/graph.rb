@@ -3,6 +3,7 @@ class Graph
 
   def initialize
     @coords = []
+    @nodes = []
     build_coords
   end
 
@@ -15,5 +16,10 @@ class Graph
   end
 
   def build_graph
+    @coords.each do |coord|
+      x = coord[0]
+      y = coord[1]
+      current_node = Node.new(coord)
+    end
   end
 end
