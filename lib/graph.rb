@@ -22,7 +22,7 @@ class Graph
       y = coord[1]
       current_node = Node.new(coord)
       possible_moves = remove_impossible_moves(possible_moves(x, y))
-      current_node.nodes = possible_moves
+      current_node.moves = possible_moves
       @nodes.push(current_node)
     end
   end

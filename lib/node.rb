@@ -1,5 +1,5 @@
 class Node
-  attr_accessor :nodes
+  attr_accessor :moves
 
   def initialize(value)
     @value = value
