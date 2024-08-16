@@ -6,6 +6,7 @@ class Graph
     @coords = []
     @nodes = []
     build_coords
+    build_graph
   end
 
   def build_coords
