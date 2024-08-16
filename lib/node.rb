@@ -3,6 +3,6 @@ class Node
 
   def initialize(value)
     @value = value
-    @nodes = []
+    @moves = []
   end
 end
