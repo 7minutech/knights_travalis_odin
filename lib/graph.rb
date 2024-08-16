@@ -44,4 +44,11 @@ class Graph
   def remove_impossible_moves(moves)
     moves.filter { |move| move.max < 8 && move.min > -1 }
   end
+
+  def find_node(move)
+    @nodes.each do |node|
+      return node if move == node.value
+    end
+    nil
+  end
 end
