@@ -51,4 +51,13 @@ class Graph
     end
     nil
   end
+
+  def find_path(start = find_node(start), final, queue = [])
+    nil if start == final
+    queue.shift
+    start.moves.each do |node|
+      queue.push(node) unless node.visited
+    end
+    find_path(queue.first, final, queue)
+  end
 end
