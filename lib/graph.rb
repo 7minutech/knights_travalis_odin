@@ -1,4 +1,5 @@
 require_relative "node"
+require "pry-byebug"
 class Graph
   attr_accessor :coords, :nodes
 
@@ -24,20 +25,21 @@ class Graph
       current_node = Node.new(coord)
       possible_moves = remove_impossible_moves(possible_moves(x, y))
       current_node.moves = possible_moves
+      binding.pry
       @nodes.push(current_node)
     end
   end
 
   def possible_moves(row, col)
     moves = []
-    moves.push([row - 2, row + 1])
-    moves.push([row - 2, row - 1])
-    moves.push([row + 2, row + 1])
-    moves.push([row + 2, row - 1])
-    moves.push([col - 1, col + 2])
-    moves.push([col - 1, col - 2])
-    moves.push([col + 1, col + 2])
-    moves.push([col + 1, col - 2])
+    moves.push([row + 1, col + 2])
+    moves.push([row + 1, col - 2])
+    moves.push([row - 1, col + 2])
+    moves.push([row - 1, col - 2])
+    moves.push([row + 2, col + 1])
+    moves.push([row + 2, col - 2])
+    moves.push([row - 2, col + 1])
+    moves.push([row - 2, col - 1])
     moves
   end
 
@@ -52,12 +54,25 @@ class Graph
     nil
   end
 
-  def find_path(start = find_node(start), final, queue = [])
-    nil if start == final
-    queue.shift
-    start.moves.each do |node|
-      queue.push(node) unless node.visited
+  def find_path(start, final, queue = [])
+    return nil if start.nil?
+    return start if start == final
+
+    if start.is_a?(Array)
+      start = find_node(start)
+      queue.push(start)
     end
+
+    checked = queue.shift
+    p checked.value
+
+    checked.visited = true
+
+    start.moves.each do |node|
+      node_obj = find_node(node)
+      queue.push(node_obj) unless node_obj.nil? || node_obj.visited
+    end
+
     find_path(queue.first, final, queue)
   end
 end
