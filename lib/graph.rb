@@ -24,8 +24,8 @@ class Graph
       y = coord[1]
       current_node = Node.new(coord)
       possible_moves = remove_impossible_moves(possible_moves(x, y))
-      current_node.moves = possible_moves
       binding.pry
+      current_node.moves = possible_moves
       @nodes.push(current_node)
     end
   end
@@ -37,9 +37,10 @@ class Graph
     moves.push([row - 1, col + 2])
     moves.push([row - 1, col - 2])
     moves.push([row + 2, col + 1])
-    moves.push([row + 2, col - 2])
+    moves.push([row + 2, col - 1])
     moves.push([row - 2, col + 1])
     moves.push([row - 2, col - 1])
+    binding.pry
     moves
   end
 
