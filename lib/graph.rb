@@ -24,7 +24,6 @@ class Graph
       y = coord[1]
       current_node = Node.new(coord)
       possible_moves = remove_impossible_moves(possible_moves(x, y))
-      binding.pry
       current_node.moves = possible_moves
       @nodes.push(current_node)
     end
@@ -40,7 +39,6 @@ class Graph
     moves.push([row + 2, col - 1])
     moves.push([row - 2, col + 1])
     moves.push([row - 2, col - 1])
-    binding.pry
     moves
   end
 
@@ -55,17 +53,15 @@ class Graph
     nil
   end
 
-  def find_path(start, final, queue = [])
-    return nil if start.nil?
-    return start if start == final
-
+  def find_path(start, final, queue = [], move_combinations = [])
     if start.is_a?(Array)
       start = find_node(start)
       queue.push(start)
     end
+    return move_combinations if start.value == final
 
     checked = queue.shift
-    p checked.value
+    move_combinations.push(checked.value)
 
     checked.visited = true
 
@@ -74,6 +70,6 @@ class Graph
       queue.push(node_obj) unless node_obj.nil? || node_obj.visited
     end
 
-    find_path(queue.first, final, queue)
+    find_path(queue.first, final, queue, move_combinations)
   end
 end
