@@ -53,23 +53,39 @@ class Graph
     nil
   end
 
-  def find_path(start, final, queue = [], move_combinations = [])
+  def knight_moves(start, final, queue = [], all_paths = [])
     if start.is_a?(Array)
       start = find_node(start)
-      queue.push(start)
-    end
-    return move_combinations if start.value == final
-
-    checked = queue.shift
-    move_combinations.push(checked.value)
-
-    checked.visited = true
-
-    start.moves.each do |node|
-      node_obj = find_node(node)
-      queue.push(node_obj) unless node_obj.nil? || node_obj.visited
+      queue.push([start, [start.value]])
     end
 
-    find_path(queue.first, final, queue, move_combinations)
+    until queue.empty?
+      checked, current_path = queue.shift
+
+      if checked.value == final
+        all_paths.push(current_path)
+      else
+        checked.visited = true
+
+        checked.moves.each do |node|
+          node_obj = find_node(node)
+          queue.push([node_obj, current_path + [node_obj.value]]) unless node_obj.nil? || node_obj.visited
+        end
+      end
+    end
+
+    display_best_paths(all_paths)
+  end
+
+  def display_best_paths(paths)
+    return if paths.empty?
+
+    min_length = paths.map(&:length).min
+    best_paths = paths.select { |path| path.length == min_length }
+
+    puts "Best Paths:"
+    best_paths.each do |path|
+      puts path.inspect
+    end
   end
 end
